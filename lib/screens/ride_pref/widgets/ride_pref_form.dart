@@ -3,7 +3,7 @@ import 'package:blabla/theme/theme.dart';
 import 'package:blabla/utils/date_time_util.dart';
 import 'package:blabla/widgets/actions/bla_button.dart';
 import 'package:blabla/widgets/display/bla_divider.dart';
-import 'package:blabla/widgets/input/bla_location_picker.dart';
+import 'package:blabla/widgets/input/bla_location_picker/bla_location_picker.dart';
 import 'package:flutter/material.dart';
 import '../../../model/ride/locations.dart';
 import '../../../model/ride_pref/ride_pref.dart';
@@ -65,9 +65,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
   void onDeparture() async {
     //go to the location picker
     Location? selectedLocation = await Navigator.of(context).push<Location>(
-      MaterialPageRoute(
-        builder: (context) => BlaLocationPicker()
-      ),
+      MaterialPageRoute(builder: (context) => BlaLocationPicker()),
     );
 
     // if user select location, rebuild
@@ -81,9 +79,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
   void onArrival() async {
     //go to the location picker
     Location? selectedLocation = await Navigator.of(context).push<Location>(
-      MaterialPageRoute(
-        builder: (context) => BlaLocationPicker(),
-      ),
+      MaterialPageRoute(builder: (context) =>  BlaLocationPicker()),
     );
 
     // if user select location, rebuild
@@ -108,8 +104,10 @@ class _RidePrefFormState extends State<RidePrefForm> {
   // ----------------------------------
   // Compute the widgets rendering
   // ----------------------------------
-  String get departureLabel => departure?.name ?? "Leaving from";
-  String get arrivalLabel => arrival?.name ?? "Going to";
+
+  //now use interpolation to display both name and country 
+  String get departureLabel =>  departure != null ? "${departure!.name}, ${departure!.country.name}" : "Leaving from";
+  String get arrivalLabel => arrival != null ? "${arrival!.name}, ${arrival!.country.name}" : "Going to";
   String get dateLabel => DateTimeUtils.formatDateTime(departureDate);
   bool get switchVisible => arrival != null && departure != null;
 
@@ -168,11 +166,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
         BlaButton(
           title: 'Search',
           type: ButtonType.primary,
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => BlaLocationPicker(),
-            ),
-          ),
+          onPressed: () => {},
         ),
       ],
     );
