@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../../model/ride_pref/ride_pref.dart';
 import '../../service/ride_prefs_service.dart';
 import '../../theme/theme.dart';
-
 import 'widgets/ride_pref_form.dart';
 import 'widgets/ride_pref_history_tile.dart';
 
@@ -58,7 +56,7 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
           "Your pick of rides at low price",
           style: BlaTextStyles.heading.copyWith(color: Colors.white),
         ),
-        SizedBox(height: 100),
+        SizedBox(height: 200),
         Container(
           margin: EdgeInsets.symmetric(horizontal: BlaSpacings.xxl),
           decoration: BoxDecoration(
